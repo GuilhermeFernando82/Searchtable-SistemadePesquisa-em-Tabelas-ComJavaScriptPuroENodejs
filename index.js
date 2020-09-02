@@ -29,44 +29,12 @@ app.post('/create', (req,res)=>{
         res.send('Falha ao enviar')
     })
 })
-app.post('/search', (req,res)=>{ 
-    var name = req.body.pesquisa
-    message.findAll({where:{name,name}}).then((result) =>{
-        if(result != undefined){
-            res.render('chat',{
-                result: result
-            })
-        }else{
-            res.send('Not found')
-        }
-    })
-})
-app.post('/remove', (req,res)=>{
-    var id = req.body.id;
-    message.findOne({where:{id,id}}).then((result) =>{
-        if(result != undefined){
-            result.destroy()
-            res.redirect('/index')
-        }else{
-            res.redirect('/index')
-        }
-    })
-})
+
+
 app.get('/index', (req, res) =>{
     message.findAll().then((result) =>{
         if(result != undefined){
             res.render('index',{
-                result: result
-            })
-        }else{
-            res.send('Not found')
-        }
-    })
-})
-app.get('/chat', (req, res) =>{
-    message.findAll().then((result) =>{
-        if(result != undefined){
-            res.render('chat',{
                 result: result
             })
         }else{
