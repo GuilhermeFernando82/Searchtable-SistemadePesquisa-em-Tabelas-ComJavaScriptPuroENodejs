@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://getbootstrap.com/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+<body>
+    <div class="container alert alert-info mt-3">
+        <form method="post" action="/create">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Nome</label>
+              <input type="text" name="name"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name" required>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Descrição</label>
+              <input type="text" name="desc"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter description" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Inserir</button>
+        </form>
+        <div class="container alert alert-info mt-3" id="chat">
+          <input type="text" name="filtro"  class="form-control" id="filtro" aria-describedby="emailHelp" placeholder="Pesquisar" required>
+          <table class="table" id="lista">
+            <thead>
+              <tr>
+                <td scope="col">Id</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Descrição</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% result.forEach(result =>{ %>
+              <tr>
+                
+                <th><%= result.id %></th>
+                <th><%= result.name %></th>
+                <th><%= result.desc %></th>
+                
+              </tr>
+                <% }) %>
+            </tbody>
+          </table>
+      
+      </div>
+    </div>
+    <script type="text/javascript">
+      window.onload=function(){
+      //para nomes
+      var filtro = document.getElementById('filtro');
+      var tabela = document.getElementById('lista');
+      filtro.onkeyup = function() {
+          var nomeFiltro = filtro.value;
+          for (var i = 1; i < tabela.rows.length; i++) {
+              var conteudoCelula = tabela.rows[i].innerText;
+              var corresponde = conteudoCelula.toLowerCase().indexOf(nomeFiltro) >= 0;
+              tabela.rows[i].style.display = corresponde ? '' : 'none';
+          }
+      };
+      }
+      
+      </script>
+</body>
+</html>
